@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday เพื่อน รด.</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #1e1e1e;
+      font-family: "Kanit", sans-serif;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #00ff88;
+      text-shadow: 2px 2px 10px #00ffcc;
+      animation: shake 1s infinite;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-top: 10px;
+      color: #ffd700;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+
+    .soldier {
+      position: absolute;
+      bottom: -100px;
+      font-size: 2em;
+      animation: march 5s linear infinite;
+    }
+
+    @keyframes march {
+      0% { left: -100px; transform: scaleX(1); }
+      50% { left: 50%; transform: scaleX(1); }
+      51% { transform: scaleX(-1); }
+      100% { left: 110%; transform: scaleX(-1); }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: yellow;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(100vh); opacity: 0; }
+    }
+     .popup {
+      position: absolute;
+      min-width: 160px;
+      max-width: 260px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #ff7eb3, #ff758c, #ffcc70);
+      color: #fff;
+      font-weight: bold;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.5) rotate(-10deg);
+      animation: popupIn 0.6s cubic-bezier(.34,1.56,.64,1) forwards,
+                 popupOut 0.6s ease 3s forwards;
+      pointer-events: none;
+    }
+
+    .popup span {
+      display: block;
+      font-size: 1.2em;
+      margin-top: 4px;
+    }
+
+    @keyframes popupIn {
+      from { opacity: 0; transform: scale(0.5) rotate(-15deg); }
+      to { opacity: 1; transform: scale(1) rotate(0deg); }
+    }
+
+    @keyframes popupOut {
+      to { opacity: 0; transform: scale(0.8) translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 สุขสันต์วันเกิดเว้ยวัยรุ่น!! 🎂</h1>
+  <h2>😂 "ขอให้รอด "ภาคสนาม" 😂</h2>
+
+  <div class="soldier">🪖</div>
+
+  <script>
+    // สร้างคอนเฟตตี้ตลก ๆ
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.background = ["red","blue","green","orange","pink"][Math.floor(Math.random()*5)];
+      document.body.appendChild(confetti);
+
+      setTimeout(()=>confetti.remove(), 3000);
+    }
+    setInterval(createConfetti, 200);
+
+    // สร้างอีโมจิทหารเดินขบวน
+    function createSoldier() {
+      const soldier = document.createElement("div");
+      soldier.classList.add("soldier");
+      soldier.textContent = "🪖";
+      document.body.appendChild(soldier);
+
+      setTimeout(()=>soldier.remove(), 6000);
+    }
+    setInterval(createSoldier, 5000);
+    function createPopup() {
+      const popup = document.createElement("div");
+      popup.className = "popup";
+
+      const messages = [
+        "HBD นะเพื่อน 🎉",
+        "ขอให้รอด รด. ภาคสนาม 😂",
+        "สุขสันต์วันเกิด!! 🥳",
+        "ขอให้ประสบความสำเร็จ 🪖",
+        "Happy Birthday bro 🍻",
+        "โชคดีมีชัย โชคชัยมีวัว 🐂"
+      ];
+      popup.innerHTML = messages[Math.floor(Math.random() * messages.length)]
+                        + "<span>🎂🎊</span>";
+
+      // สุ่มตำแหน่งบนจอ
+      popup.style.left = Math.random() * (window.innerWidth - 200) + "px";
+      popup.style.top  = Math.random() * (window.innerHeight - 150) + "px";
+
+      document.body.appendChild(popup);
+      setTimeout(()=>popup.remove(), 3600);
+    }
+
+    setInterval(createPopup, 1100); // เด้งทุก 2.5 วิ
+  </script>
+</body>
+</html>
